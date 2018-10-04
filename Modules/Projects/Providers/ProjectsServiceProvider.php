@@ -60,7 +60,7 @@ class ProjectsServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/projects');
+        $viewPath = resource_path('views/Modules/projects');
 
         $sourcePath = __DIR__.'/../Resources/views';
 
@@ -69,7 +69,7 @@ class ProjectsServiceProvider extends ServiceProvider
         ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/projects';
+            return $path . '/Modules/projects';
         }, \Config::get('view.paths')), [$sourcePath]), 'projects');
     }
 
@@ -80,7 +80,7 @@ class ProjectsServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/projects');
+        $langPath = resource_path('lang/Modules/projects');
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'projects');

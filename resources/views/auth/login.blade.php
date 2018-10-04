@@ -22,7 +22,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ _('Не правильно указано e-mail или пароль!') }}</strong>
+                                        <strong>{{ __('Не правильно указано e-mail или пароль!') }}</strong>
                                     </span>
                                 @endif
 

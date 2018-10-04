@@ -44,7 +44,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $projects->links() }}
+                {{ $project->links() }}
             </div>
         </div>
     </div>

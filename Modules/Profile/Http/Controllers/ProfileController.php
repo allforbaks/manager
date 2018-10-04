@@ -5,19 +5,17 @@ namespace Modules\Profile\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Models\Users;
+use Modules\Profile\Model\User;
 
 class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Users $users
-     * @param Request $request
      * @return Response
      */
-    public function index(Users $users)
+    public function index()
     {
-        $user = Users::getCurrentUser();
+        $user = User::getCurrentUser();
         return view('profile::index', compact('user'));
     }
 
@@ -39,13 +37,12 @@ class ProfileController extends Controller
 
     /**
      * Show the specified resource.
-     * @param Users $users
      * @return Response
      * @param int $id
      */
-    public function show(Users $users, $id)
+    public function show($id)
     {
-        $user = $users->find($id);
+        $user = User::find($id);
         return view('profile::show', compact('user'));
     }
 
@@ -59,14 +56,13 @@ class ProfileController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Users $users
      * @param  Request $request
      * @param int $id
      * @return Response
      */
-    public function update(Users $users,Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $user = $users->find($id);
+        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->image = $request->image;
@@ -77,13 +73,12 @@ class ProfileController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param Users $users
      * @param int $id
      * @return Response
      */
-    public function destroy(Users $users, $id)
+    public function destroy($id)
     {
-        $user = $users->find($id);
+        $user = User::find($id);
         $user->delete();
 
         return redirect()->route('home');

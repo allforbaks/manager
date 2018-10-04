@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Profile\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class User extends Model
 {
     public function scopeUserId() {
         return auth()->user()->id;
     }
 
     public function scopeGetCurrentUser($query) {
-        return $query->where('id', Users::userid())->get();
+        return $query->where('id', User::userid())->get();
     }
 
     public function projects() {
-        return $this->hasMany('App\Models\Projects');
+        return $this->hasMany('App\Models\Project');
     }
 }

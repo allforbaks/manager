@@ -5,18 +5,18 @@ namespace Modules\Projects\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Models\Projects;
+use Modules\Projects\Model\Project;
 
 
 class ProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Projects $projects
      * @return Response
      */
-    public function index(Projects $projects)
+    public function index()
     {
+        $projects = new Project;
         $project = $projects->asc()->simplePaginate(5);
 
         return view('projects::index', compact('project'));
@@ -34,11 +34,11 @@ class ProjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param  Request $request
-     * @param Projects $projects
      * @return Response
      */
-    public function store(Request $request, Projects $projects)
+    public function store(Request $request)
     {
+        $projects = new Project;
         $projects->title = $request->title;
         $projects->save();
 
@@ -47,40 +47,38 @@ class ProjectsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param Projects $projects
+     * @param Project $projects
      * @return Response
      * @param int $id
      */
-    public function show(Projects $projects, $id)
+    public function show( $id)
     {
-        $project = $projects->find($id);
+        $project = Project::find($id);
 
         return view('projects::show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param Projects $projects
      * @return Response
      * @param int $id
      */
-    public function edit(Projects $projects, $id)
+    public function edit($id)
     {
-        $project = $projects->find($id);
+        $project = Project::find($id);
 
         return view('projects::edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Projects $projects
      * @param  Request $request
      * @param int $id
      * @return Response
      */
-    public function update(Projects $projects,Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $project = $projects->find($id);
+        $project = Project::find($id);
         $project->title = $request->title;
         $project->save();
 
@@ -89,14 +87,12 @@ class ProjectsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param Projects $projects
      * @param int $id
      * @return Response
      */
-    public function destroy(Projects $projects, $id)
+    public function destroy($id)
     {
-        $project = $projects->find($id);
-        $project->delete();
+        Project::find($id)->delete();
 
         return redirect()->route('projects.index');
 

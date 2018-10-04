@@ -1,6 +1,4 @@
 <?php
 
-Route::group(['middleware' => 'web', 'namespace' => 'Modules\Profile\Http\Controllers'], function()
-{
-    Route::resource('profile', 'ProfileController');
-});
+Route::get('profile/{user}', 'Modules\Profile\Http\Controllers\ProfileController@show')->name('profile.show')->middleware('web');
+Route::put('profile/{user}', 'Modules\Profile\Http\Controllers\ProfileController@update')->name('profile.update')->middleware('web');

@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="q-profile">
-            <form method="POST" action="{{ route('profile.update')  }}" >
+            <form method="POST" action="{{ route('{user}.update')  }}" >
                 @csrf
 
                 <div class="q-profile__form">

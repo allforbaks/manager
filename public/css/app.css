@@ -2645,9 +2645,6 @@ a:hover {
 .q-user__avatar--edit-btn {
   width: 44px;
   height: 44px;
-  background: #d8262f;
-  border: 2px solid #fff;
-  border-radius: 50%;
   position: absolute;
   top: calc(50% - 22px);
   right: -21px;

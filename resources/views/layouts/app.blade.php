@@ -30,7 +30,7 @@
             <header class="q-header">
                 <div class="q-inner">
                     <a href="/" class="q-logo">
-                        <img src="/img/logo.svg" alt="" class="q-logo__img">
+                        <img src="/storage/logo.svg" alt="" class="q-logo__img">
                     </a>
                     <div class="q-mobile-burger js-toggle-mobile-menu">
                         <span></span>
@@ -52,7 +52,7 @@
                         @else
                         <div class="q-user">
                             <div class="q-user__avatar">
-                                <img src="/img/{{ Auth::user()->image }}" alt="" class="q-user__avatar-img">
+                                <img src="/storage/{{ Auth::user()->image }}" alt="" class="q-user__avatar-img">
                                 
                             </div>
                             <div class="q-user__info">
@@ -133,7 +133,7 @@
 <!-- footer -->
 <footer class="q-footer">
     <div class="q-inner">
-        <div class="q-footer__logo"><img src="/img/logo_footer.svg" alt="" class="q-logo__img"></div>
+        <div class="q-footer__logo"><img src="/storage/uploads/logo_footer.png" alt="" class="q-logo__img"></div>
         <div class="q-footer__left-info">
             <p class="q-footer__copyright">&copy; 2018. Молодёжка Project</p>
             <ul class="q-footer__menu">

@@ -6,15 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    public function scopeUserId() {
-        return auth()->user()->id;
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'email', 'images'];
+
+    /**
+     * @param $request
+     * @param $user
+     * @return mixed
+     */
+    public function scopeCurrentUser($request, $user)
+    {
+        return $request->where('id', $user->id);
     }
 
-    public function scopeGetCurrentUser($query) {
-        return $query->where('id', User::userid())->get();
-    }
-
-    public function projects() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+     public function projects() {
         return $this->hasMany('App\Models\Project');
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9950210670797df511610fd5b31e372d",
+    "content-hash": "e6ce3f1544df235367ca820f4d52d142",
     "packages": [
         {
             "name": "beyondcode/laravel-confirm-email",

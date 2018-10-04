@@ -6,17 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Profile\Model\User;
+use Modules\Profile\Http\Requests\UpdateProfile;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ProfileController extends Controller
 {
+    use ValidatesRequests;
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $user = User::getCurrentUser();
-        return view('profile::index', compact('user'));
     }
 
     /**
@@ -37,12 +39,11 @@ class ProfileController extends Controller
 
     /**
      * Show the specified resource.
+     * @param User $user
      * @return Response
-     * @param int $id
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
         return view('profile::show', compact('user'));
     }
 
@@ -56,29 +57,28 @@ class ProfileController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param User $user
      * @param  Request $request
-     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user, UpdateProfile $request)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->image = $request->image;
-        $user->save();
+        $user->currentUser($user)->update(['name' => $request->name,
+                                            'email' => $request->email,
+                                            'image' => $request->file('image')->store('uploads', 'public')]);
 
-        return redirect()->route('profile.show', $user->id);
+        return redirect()->route('profile.show', $user);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param Users $users
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Users $users, $id)
     {
-        $user = User::find($id);
+        $user = $users->find($id);
         $user->delete();
 
         return redirect()->route('home');

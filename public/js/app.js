@@ -27,7 +27,7 @@
 /******/ 	}
 /******/
 /******/
-/******/ 	// expose the Modules object (__webpack_modules__)
+/******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
 /******/
 /******/ 	// expose the module cache
@@ -44,7 +44,7 @@
 /******/ 		}
 /******/ 	};
 /******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony Modules
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
 /******/ 			function getDefault() { return module['default']; } :
@@ -7032,7 +7032,7 @@ function fcamelCase( all, letter ) {
 	return letter.toUpperCase();
 }
 
-// Convert dashed to camelCase; used by the css and data Modules
+// Convert dashed to camelCase; used by the css and data modules
 // Support: IE <=9 - 11, Edge 12 - 15
 // Microsoft forgot to hump their vendor prefix (#9572)
 function camelCase( string ) {
@@ -13361,14 +13361,14 @@ jQuery.isNumeric = function( obj ) {
 
 // Register as a named AMD module, since jQuery can be concatenated with other
 // files that may use define, but not via a proper concatenation script that
-// understands anonymous AMD Modules. A named AMD is safest and most robust
+// understands anonymous AMD modules. A named AMD is safest and most robust
 // way to register. Lowercase jquery is used because AMD module names are
 // derived from file names, and jQuery is normally delivered in a lowercase
 // file name. Do this after creating the global so that if an AMD module wants
 // to call noConflict to hide this version of jQuery, it will work.
 
 // Note that for maximum portability, libraries that are not jQuery should
-// declare themselves as anonymous Modules, and avoid setting a global if an
+// declare themselves as anonymous modules, and avoid setting a global if an
 // AMD loader is present. jQuery is a special case. For more information, see
 // https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
 
@@ -36223,7 +36223,7 @@ var no = function (a, b, c) { return false; };
 var identity = function (_) { return _; };
 
 /**
- * Generate a static keys string from compiler Modules.
+ * Generate a static keys string from compiler modules.
  */
 function genStaticKeys (modules) {
   return modules.reduce(function (keys, m) {
@@ -41590,7 +41590,7 @@ function createPatchFunction (backend) {
       setScope(vnode);
     } else {
       // empty component root.
-      // skip all element-related Modules except for ref (#3455)
+      // skip all element-related modules except for ref (#3455)
       registerRef(vnode);
       // make sure to invoke the insert hook
       insertedVnodeQueue.push(vnode);
@@ -41921,7 +41921,7 @@ function createPatchFunction (backend) {
   }
 
   var hydrationBailed = false;
-  // list of Modules that can skip create hook during hydration because they
+  // list of modules that can skip create hook during hydration because they
   // are already rendered on the client or has no need for initialization
   // Note: style is excluded because it relies on initial clone for future
   // deep updates (#7063).
@@ -43897,7 +43897,7 @@ var platformModules = [
 /*  */
 
 // the directive module should be applied last, after all
-// built-in Modules have been applied.
+// built-in modules have been applied.
 var modules = platformModules.concat(baseModules);
 
 var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
@@ -46744,7 +46744,7 @@ function createCompilerCreator (baseCompile) {
       };
 
       if (options) {
-        // merge custom Modules
+        // merge custom modules
         if (options.modules) {
           finalOptions.modules =
             (baseOptions.modules || []).concat(options.modules);
@@ -47248,7 +47248,7 @@ module.exports = function normalizeComponent (
   var esModule
   var scriptExports = rawScriptExports = rawScriptExports || {}
 
-  // ES6 Modules interop
+  // ES6 modules interop
   var type = typeof rawScriptExports.default
   if (type === 'object' || type === 'function') {
     esModule = rawScriptExports

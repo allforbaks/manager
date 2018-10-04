@@ -7,19 +7,19 @@
             <div class="q-page__header _single-title">
                 <h1 class="q-page__title">Мой профиль</h1>
                 <div class="q-page__header--right-part-profile">
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['profile.destroy', $user->id]]) !!}
-                    {!! Form::submit('Удалить', ['class' => 'q-page__link-after-title _like-dashed-link js-show-q-profile-popup']) !!}
-                    {!! Form::close() !!}
+                    {{--{!! Form::open(['method' => 'DELETE', 'route' => ['profile.destroy', $user->id]]) !!}--}}
+                    {{--{!! Form::submit('Удалить', ['class' => 'q-page__link-after-title _like-dashed-link js-show-q-profile-popup']) !!}--}}
+                    {{--{!! Form::close() !!}--}}
                 </div>
             </div>
             <div class="q-profile">
-                {!! Form::model($user, ['route' => ['profile.update', $user->id], 'method' => 'PUT']) !!}
+                {!! Form::model($user, ['route' => ['profile.update', $user], 'method' => 'PUT', 'files' => true]) !!}
+                {{ csrf_field() }}
                     <div class="q-profile__form">
                         <div class="q-profile__col _av-col">
                             <div class="q-user__avatar-profile _text-center">
                                 <div class="q-user__avatar _large _edit q-user-white-border">
-                                    <img src="/img/avatar.png" alt="" class="q-user__avatar-img">
-                                    <span class="q-user__avatar--edit-btn"></span>
+                                    <img src="/storage/{{ $user->image }}" class="q-user__avatar-img">
                                     {!! Form::file('image') !!}
                                 </div>
                             </div>
@@ -39,11 +39,6 @@
                                 <div class="q-form__input--wrapper">
                                     {{ Form::text('name', null,  ['class' => 'q-form__input q-form-white'])  }}
                                 </div>
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                                @endif
                             </div>
                             <div class="q-form__row">
                                 {{ Form::label('email', 'E-mail:', ['class' => 'q-form__label _with-link']) }}
@@ -53,11 +48,6 @@
                                 <div class="q-form__input--wrapper">
                                     {{ Form::email('email', null,  ['class' => 'q-form__input q-form-white'])  }}
                                 </div>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                                @endif
                             </div>
                         </div>
                     </div>

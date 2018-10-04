@@ -86,7 +86,7 @@
          
             </div>
             <div class="q-about-us__right-part">
-                <img src="img/screen.png" alt="">
+                <img src="/storage/uploads/screen.png" alt="">
             </div>
         </div>
     </div>               

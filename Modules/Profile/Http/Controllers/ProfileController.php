@@ -5,7 +5,7 @@ namespace Modules\Profile\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Profile\Model\User;
+use Modules\Profile\Entities\User;
 use Modules\Profile\Http\Requests\UpdateProfile;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 

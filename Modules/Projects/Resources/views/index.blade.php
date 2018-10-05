@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($project as $p)
+                        @foreach($projects as $p)
                             <tr>
                                 <td class="table-projects-1 _title-col">
                                     <a class="q-news__info--title" href="{{ URL::to('projects/' . $p->id) }}">{{ $p->title }}</a>
@@ -33,9 +33,9 @@
                                 </td>
                                 <td>
                                     <div class="q-buttons__list">
-                                        <a href="{{ URL::to('projects/' . $p->id) . '/edit' }}" class="q-button _xs _light-gray _uppercase js-show-q-edit-user-project-popup">Изменить
+                                        <a href="{{ URL::to('projects/' . $p) . '/edit' }}" class="q-button _xs _light-gray _uppercase js-show-q-edit-user-project-popup">Изменить
                                         </a>
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['projects.destroy', $p->id]]) !!}
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['project.destroy', $p]]) !!}
                                         {!! Form::submit('Удалить', ['class' => 'q-button _xs _light-gray _uppercase']) !!}
                                         {!! Form::close() !!}
                                     </div>
@@ -44,7 +44,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $project->links() }}
+                {{ $projects->links() }}
             </div>
         </div>
     </div>

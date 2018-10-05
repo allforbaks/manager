@@ -7,9 +7,9 @@
             <div class="q-page__header _single-title">
                 <h1 class="q-page__title">Мой профиль</h1>
                 <div class="q-page__header--right-part-profile">
-                    {{--{!! Form::open(['method' => 'DELETE', 'route' => ['profile.destroy', $user->id]]) !!}--}}
-                    {{--{!! Form::submit('Удалить', ['class' => 'q-page__link-after-title _like-dashed-link js-show-q-profile-popup']) !!}--}}
-                    {{--{!! Form::close() !!}--}}
+                    {!! Form::open(['method' => 'DELETE', 'route' => ['profile.destroy', $user]]) !!}
+                    {!! Form::submit('Удалить', ['class' => 'q-page__link-after-title _like-dashed-link js-show-q-profile-popup']) !!}
+                    {!! Form::close() !!}
                 </div>
             </div>
             <div class="q-profile">

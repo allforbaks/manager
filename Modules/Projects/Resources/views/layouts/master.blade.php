@@ -63,7 +63,7 @@
                                             <a href="{{ URL::to('profile/' . Auth::user()->id) }}" class="q-main-submenu__link">Профиль</a>
                                         </li>
                                         <li class="q-main-submenu__item">
-                                            <a href="projects/" class="q-main-submenu__link">Мои проекты</a>
+                                            <a href="{{ route('project.index') }}" class="q-main-submenu__link">Мои проекты</a>
                                         </li>
                                         <li class="q-main-submenu__item">
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -88,7 +88,7 @@
                                         <a href="{{ URL::to('profile/' . Auth::user()->id) }}" class="q-main-submenu__link">Профиль</a>
                                     </li>
                                     <li class="q-main-submenu__item">
-                                        <a href="#" class="q-main-submenu__link">Мои проекты</a>
+                                        <a href="{{ route('project.index') }}" class="q-main-submenu__link">Мои проекты</a>
                                     </li>
                                     <li class="q-main-submenu__item">
                                         <a href="#" class="q-main-submenu__link js-show-q-my-invitation-popup">Приглашения</a>
@@ -106,7 +106,7 @@
                                 </ul>
                             </li>
                             <li class="q-main-menu__item _dropdown">
-                                <a href="#" class="q-main-menu__link">Проекты</a>
+                                <a href="{{ route('project.index') }}" class="q-main-menu__link">Проекты</a>
                                 <ul class="q-main-submenu submenu-new-projekt">
 
                                     <li class="q-main-submenu__item">
@@ -119,7 +119,7 @@
                                         <a href="#" class="q-main-submenu__link">Проект 3</a>
                                     </li>
                                     <li class="q-main-submenu__item q-main-submenu__item-new-projekt">
-                                        <a href="projects/create" class="q-main-submenu__link link-new-projekt js-show-q-create-project-popup">Создать новый проект</a>
+                                        <a href="{{ route('project.create') }}" class="q-main-submenu__link link-new-projekt js-show-q-create-project-popup">Создать новый проект</a>
                                     </li>
                                 </ul>
                             </li>

@@ -9,7 +9,7 @@
             <div class="q-page__header">
                 <h1 class="q-page__title">Создайте новый проект</h1>
             </div>
-            {!! Form::model($project, ['route' => ['projects.update', $project->id], 'method' => 'PUT']) !!}
+            {!! Form::model($project, ['route' => ['project.update', $project->id], 'method' => 'PUT']) !!}
                 <div class="q-form__row">
                     {{ Form::label('title', 'Название проекта', ['class' => 'q-form__label']) }}
                     <div class="q-form__input--wrapper">

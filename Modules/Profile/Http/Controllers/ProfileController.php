@@ -72,13 +72,11 @@ class ProfileController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param Users $users
-     * @param int $id
+     * @param User $user
      * @return Response
      */
-    public function destroy(Users $users, $id)
+    public function destroy(User $user)
     {
-        $user = $users->find($id);
         $user->delete();
 
         return redirect()->route('home');

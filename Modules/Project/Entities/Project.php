@@ -25,6 +25,6 @@ class Project extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function task() {
-        return $this->hasMany('Modules\Task\Entities\Task');
+        return $this->hasMany('Modules\Project\Entities\Task');
     }
 }

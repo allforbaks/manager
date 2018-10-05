@@ -72,7 +72,7 @@ class ProjectController extends Controller
      */
     public function update(Project $project, CreateProject $request)
     {
-        $project->currentProject($project)->update(['title' => $request->title]);
+        $project->update(['title' => $request->title]);
 
         return redirect()->route('project.show', $project);
     }

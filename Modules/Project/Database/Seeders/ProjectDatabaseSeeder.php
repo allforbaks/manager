@@ -15,13 +15,14 @@ class ProjectDatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('projects')->insert([
+            'user_id' => 1,
             'title' => 'Ишли мишки по лесу',
             'created_at' => '2018-10-05 06:12:08',
             'updated_at' => '2018-10-05 06:14:23',
         ]);
 
         DB::table('tasks')->insert([
-            'project_id' => '1',
+            'project_id' => 1,
             'urgency' => 'Быстрее',
             'start_at' => '2018-10-05 06:12:08',
             'finish_at' => '2018-10-07 06:12:08',

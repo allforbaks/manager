@@ -3,6 +3,8 @@
 namespace Modules\Profile\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Project\Entities\Project;
+
 
 class User extends Model
 {
@@ -25,6 +27,6 @@ class User extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
      public function project() {
-        return $this->hasMany('Module\Projects\Model\Project');
+        return $this->hasMany(Project::class);
     }
 }

@@ -1,5 +1,8 @@
 <?php
+use Modules\Profile\Http\Controllers\ProfileController;
 
-Route::get('profile/{user}', 'Modules\Profile\Http\Controllers\ProfileController@show')->name('profile.show')->middleware('web');               //профиль пользователя
-Route::put('profile/{user}', 'Modules\Profile\Http\Controllers\ProfileController@update')->name('profile.update')->middleware('web');           //обновление данных пользователя
-Route::delete('profile/{user}', 'Modules\Profile\Http\Controllers\ProfileController@destroy')->name('profile.destroy')->middleware('web');      //удаление профиля пользователя
+Route::group(['middleware' => 'web', 'prefix' => 'profile'], function() {
+    Route::get('{user}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('{user}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('{user}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});

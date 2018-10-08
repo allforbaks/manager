@@ -39,7 +39,6 @@ class TaskController extends Controller
      */
     public function store(Task $task, CreateTask $request)
     {
-        dd($request);
         $task->create(['urgency' => $request->urgency,
                         'project_id' => $request->project_id,
                         'start_at' => $request->start_at,

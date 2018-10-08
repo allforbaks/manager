@@ -1,11 +1,19 @@
 <?php
 
-Route::get('projects', 'Modules\Project\Http\Controllers\ProjectController@index')->name('project.index')->middleware('web');
-Route::get('projects/create', 'Modules\Project\Http\Controllers\ProjectController@create')->name('project.create')->middleware('web');
-Route::post('projects', 'Modules\Project\Http\Controllers\ProjectController@store')->name('project.store')->middleware('web');
-Route::get('projects/{project}', 'Modules\Project\Http\Controllers\ProjectController@show')->name('project.show')->middleware('web');
-Route::get('projects/{project}/edit', 'Modules\Project\Http\Controllers\ProjectController@edit')->name('project.edit')->middleware('web');
-Route::put('projects/{project}', 'Modules\Project\Http\Controllers\ProjectController@update')->name('project.update')->middleware('web');
-Route::delete('projects/{project}', 'Modules\Project\Http\Controllers\ProjectController@destroy')->name('project.destroy')->middleware('web');
-Route::get('projects/{project}/task/add', 'Modules\Project\Http\Controllers\TaskController@create')->name('task.add')->middleware('web');
-Route::post('projects/{project}', 'Modules\Project\Http\Controllers\TaskController@store')->name('task.store')->middleware('web');
+use Modules\Project\Http\Controllers\{ProjectController,
+    TaskController
+};
+
+Route::group(['middleware' => 'web', 'prefix' => 'projects'], function() {
+    Route::get('', [ProjectController::class, 'index'])->name('project.index');
+    Route::get('create', [ProjectController::class, 'create'])->name('project.create');
+    Route::post('', [ProjectController:: class, 'store'])->name('project.store');
+    Route::get('{project}', [ProjectController:: class, 'show'])->name('project.show');
+    Route::get('{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::put('{project}', [ProjectController::class, 'update'])->name('project.update');
+    Route::delete('{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
+    Route::get('{project}/task/add', [TaskController::class, 'create'])->name('task.add');
+    Route::post('{project}', [TaskController::class, 'store'])->name('task.store');
+});
+
+

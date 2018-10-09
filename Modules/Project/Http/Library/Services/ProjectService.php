@@ -3,14 +3,30 @@ namespace Modules\Project\Http\Library\Services;
 
 Class ProjectService
 {
-    public function checkBalance($project)
+    /**
+     * @param $project
+     * @param $price
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function checkBalance($project, $price)
     {
         $balance = auth()->user()->balance;
-        if ( $balance < 100 )
+        if ( $balance < $price->first()->project )
         {
             return redirect('projects')->with('error', 'Недостаточно средств на счету. Пополните баланс!');
         } else {
             return view('project::create');
         }
     }
+
+    /**
+     * @param $price
+     */
+    public function addProject($price)
+    {
+        auth()->user()->balance -= $price->first()->project;
+        auth()->user()->save();
+    }
+
+
 }

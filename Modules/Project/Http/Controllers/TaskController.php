@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\Task;
+use Modules\Admin\Entities\Price;
 use Modules\Project\Http\Library\Services\TaskService;
 use Modules\Project\Http\Requests\CreateTask;
 
@@ -25,25 +26,27 @@ class TaskController extends Controller
      * Show the form for creating a new resource.
      * @param Task $task
      * @param TaskService $service
+     * @param Price $price
      * @param Project $project
      * @return Response
      */
-    public function create(Project $project, Task $task, TaskService $service)
+    public function create(Price $price, Project $project, Task $task, TaskService $service)
     {
-       return $service->checkBalance($project, $task);
+       return $service->checkBalance($project, $task, $price);
     }
 
     /**
      * Store a newly created resource in storage.
      * @param Project $project
+     * @param Price $price
+     * @param TaskService $service
      * @param Task $task
      * @param  CreateTask $request
      * @return Response
      */
-    public function store(Task $task, CreateTask $request, Project $project)
+    public function store(TaskService $service, Price $price, Task $task, CreateTask $request, Project $project)
     {
-        auth()->user()->balance -= 10;
-        auth()->user()->save();
+        $service->addTask($price);
 
         $task->create([
             'urgency' => $request->urgency,
@@ -55,7 +58,7 @@ class TaskController extends Controller
             'file' => $request->file('file')->store('uploads', 'public')
         ]);
 
-        return redirect('projects/' . $project)->with('success', 'Задача добавлена успешно!');
+        return redirect('projects/' . $project->id)->with('success', 'Задача добавлена успешно!');
 
     }
 

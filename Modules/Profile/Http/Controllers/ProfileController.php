@@ -58,14 +58,14 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      * @param User $user
-     * @param  Request $request
+     * @param  UpdateProfile $request
      * @return Response
      */
     public function update(User $user, UpdateProfile $request)
     {
-        $user->currentUser($user)->update(['name' => $request->name,
-                                            'email' => $request->email,
-                                            'image' => $request->file('image')->store('uploads', 'public')]);
+        $user->update(['name' => $request->name,
+                        'email' => $request->email,
+                        'image' => $request->file('image')->store('uploads', 'public')]);
 
         return redirect()->route('profile.show', $user);
     }

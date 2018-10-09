@@ -5,6 +5,7 @@ namespace Modules\Project\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
+use Modules\Admin\Entities\Price;
 use Modules\Project\Http\Library\Services\ProjectService;
 use Modules\Project\Http\Requests\CreateProject;
 
@@ -25,24 +26,26 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      * @param  Project $project
+     * @param Price $price
      * @param ProjectService $service
      * @return Response
      */
-    public function create(Project $project, ProjectService $service)
+    public function create(Price $price, Project $project, ProjectService $service)
     {
-        return $service->checkBalance($project);
+        return $service->checkBalance($project, $price);
     }
 
     /**
      * Store a newly created resource in storage.
      * @param  Project $project
+     * @param Price $price
      * @param  CreateProject $request
+     * @param ProjectService $service
      * @return Response
      */
-    public function store(Project $project, CreateProject $request)
+    public function store(Price $price, Project $project, CreateProject $request, ProjectService $service)
     {
-        auth()->user()->balance -= 100;
-        auth()->user()->save();
+        $service->addProject($price);
 
         $project->create(['title' => $request->title]);
 

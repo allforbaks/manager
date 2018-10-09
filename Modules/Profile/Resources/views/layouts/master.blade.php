@@ -66,7 +66,7 @@
                                             <a href="{{ route('project.index') }}" class="q-main-submenu__link">Мои проекты</a>
                                         </li>
                                         <li class="q-main-submenu__item">
-                                            <a href="#" class="q-main-submenu__link js-show-q-my-invitation-popup">Приглашения</a>
+                                            <a href="{{ URL::to('profile/' . Auth::user()->id . '/payment') }}" class="q-main-submenu__link">Пополнить баланс</a>
                                         </li>
                                         <li class="q-main-submenu__item">
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -94,7 +94,7 @@
                                         <a href="{{ route('project.index') }}" class="q-main-submenu__link">Мои проекты</a>
                                     </li>
                                     <li class="q-main-submenu__item">
-                                        <a href="#" class="q-main-submenu__link js-show-q-my-invitation-popup">Приглашения</a>
+                                        <a href="{{ URL::to('profile/' . Auth::user()->id . '/payment') }}" class="q-main-submenu__link">Пополнить баланс</a>
                                     </li>
                                     <li class="q-main-submenu__item">
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -124,6 +124,9 @@
                                         <a href="{{ route('project.create') }}" class="q-main-submenu__link link-new-projekt js-show-q-create-project-popup">Создать новый проект</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li class="q-main-menu__item _dropdown">
+                                <a href="#" class="q-main-menu__link">Баланс: {{ Auth::user()->balance }}</a>
                             </li>
                         </ul>
                     @endguest

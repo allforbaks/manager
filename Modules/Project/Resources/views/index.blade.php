@@ -8,8 +8,16 @@
                 <h1 class="q-page__title">Мои проекты</h1>
                 <div class="q-buttons__submit _hide-992">
                     <a href="projects/create" class="q-button _red js-show-q-create-project-popup">Создать проект</a>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @elseif(Session::has('error'))
+                        <div class="alert alert-success">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif
                 </div>
-
             </div>
             <div class="q-my-actions">
                 <table class="q-simple-table _tm q-actions-table">
@@ -44,6 +52,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $projects->links() }}
             </div>
         </div>
     </div>

@@ -7,7 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\Task;
-use Modules\Task\Http\Requests\CreateTask;
+use Modules\Project\Http\Library\Services\TaskService;
+use Modules\Project\Http\Requests\CreateTask;
 
 class TaskController extends Controller
 {
@@ -23,31 +24,38 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      * @param Task $task
+     * @param TaskService $service
      * @param Project $project
      * @return Response
      */
-    public function create(Project $project, Task $task)
+    public function create(Project $project, Task $task, TaskService $service)
     {
-        return view('project::addTask', compact('project'));
+       return $service->checkBalance($project, $task);
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param Project $project
      * @param Task $task
      * @param  CreateTask $request
      * @return Response
      */
-    public function store(Task $task, CreateTask $request)
+    public function store(Task $task, CreateTask $request, Project $project)
     {
-        $task->create(['urgency' => $request->urgency,
-                        'project_id' => $request->project_id,
-                        'start_at' => $request->start_at,
-                        'finish_at' => $request->finish_at,
-                        'title' => $request->title,
-                        'description'=> $request->description,
-                        'file' => $request->file('file')->store('uploads', 'public')]);
+        auth()->user()->balance -= 10;
+        auth()->user()->save();
 
-        return redirect()->route('project.index');
+        $task->create([
+            'urgency' => $request->urgency,
+            'project_id' => $request->project_id,
+            'start_at' => $request->start_at,
+            'finish_at' => $request->finish_at,
+            'title' => $request->title,
+            'description' => $request->description,
+            'file' => $request->file('file')->store('uploads', 'public')
+        ]);
+
+        return redirect('projects/' . $project)->with('success', 'Задача добавлена успешно!');
 
     }
 

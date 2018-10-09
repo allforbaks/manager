@@ -1,4 +1,4 @@
-@extends('task::layouts.master')
+@extends('project::layouts.master')
 
 @section('title', 'Добавление задачи')
 
@@ -9,7 +9,7 @@
             <div class="q-page__header">
                 <h1 class="q-page__title">Создайте новую задачу</h1>
             </div>
-            {!! Form::open(['method' => 'post', 'route' => 'task.store', 'files' => true], ['class' => 'q-form g-no-projects']) !!}
+            {!! Form::open(['method' => 'post', 'files' => true, 'route' => ['task.store', $project]], ['class' => 'q-form g-no-projects']) !!}
             {{ Form::hidden('project_id', $project->id) }}
                 <div class="q-form__row g-white-select">
                     {{ Form::label('urgency', 'Срочность:', ['class' => 'q-form__label _with-link']) }}

@@ -2,10 +2,10 @@
 
 namespace Modules\Project\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
+use Modules\Project\Http\Library\Services\ProjectService;
 use Modules\Project\Http\Requests\CreateProject;
 
 class ProjectController extends Controller
@@ -24,11 +24,13 @@ class ProjectController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @param  Project $project
+     * @param ProjectService $service
      * @return Response
      */
-    public function create()
+    public function create(Project $project, ProjectService $service)
     {
-        return view('project::create');
+        return $service->checkBalance($project);
     }
 
     /**
@@ -39,7 +41,10 @@ class ProjectController extends Controller
      */
     public function store(Project $project, CreateProject $request)
     {
-        $project->create(['title' => $request->title,]);
+        auth()->user()->balance -= 100;
+        auth()->user()->save();
+
+        $project->create(['title' => $request->title]);
 
         return redirect()->route('project.show', $project);
     }
@@ -51,7 +56,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('project::show', compact('project'));
+        $group = $project->task->groupBy('status');
+        return view('project::show', compact('group', 'project'));
     }
 
     /**

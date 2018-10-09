@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Profile\Entities\User;
 use Modules\Project\Entities\Project;
 use Modules\Admin\Entities\Price;
+use Modules\Admin\Entities\Role;
 use Illuminate\Routing\Controller;
 
 class AdminController extends Controller
@@ -31,7 +32,7 @@ class AdminController extends Controller
     public function indexProject(Project $project)
     {
         $projects = $project->latest()->simplePaginate(10);
-        dd($projects);
+
         return view('admin::indexProjects', compact('projects'));
     }
 
@@ -61,6 +62,7 @@ class AdminController extends Controller
     public function show(Price $price)
     {
         $prices = $price->latest()->first();
+
         return view('admin::show', compact('prices'));
     }
 

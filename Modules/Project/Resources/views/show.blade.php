@@ -42,51 +42,57 @@
         <div class="q-tasks-list">
             <div class="g-column">
                 <span class="text-column">Новая:</span>
-                @foreach($group[1] as $tasks)
-                    <div class="g-task">
-                        <a class="open-g-task js-show-q-view-task-admin-popup" href="#">
-                            <div class="g-task-header"><div class="g-task-header-name">Я себе поручил:</div>
-                                {{ $tasks->title }}<div class="g-task-footer-urgency"></div></div>
-                        </a>
-                        <div class="g-task-footer">
-                            <div class="g-task-footer-date">
-                                {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                @isset($group[1])
+                    @foreach($group[1] as $tasks)
+                        <div class="g-task">
+                            <a class="open-g-task js-show-q-view-task-admin-popup" href="#">
+                                <div class="g-task-header"><div class="g-task-header-name">Я себе поручил:</div>
+                                    {{ $tasks->title }}<div class="g-task-footer-urgency"></div></div>
+                            </a>
+                            <div class="g-task-footer">
+                                <div class="g-task-footer-date">
+                                    {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endisset
             </div>
             <div class="g-column">
                 <span class="text-column">В работе:</span>
-                @foreach($group[2] as $tasks)
-                    <div class="g-task">
-                        <a class="open-g-task" href="#">
-                            <div class="g-task-header"><div class="g-task-header-name">Я поручил(а):</div>
-                                {{ $tasks->title }}</div>
-                        </a>
-                        <div class="g-task-footer">
-                            <div class="g-task-footer-date">
-                                {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                @isset($group[2])
+                    @foreach($group[2] as $tasks)
+                        <div class="g-task">
+                            <a class="open-g-task" href="#">
+                                <div class="g-task-header"><div class="g-task-header-name">Я поручил(а):</div>
+                                    {{ $tasks->title }}</div>
+                            </a>
+                            <div class="g-task-footer">
+                                <div class="g-task-footer-date">
+                                    {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endisset
             </div>
             <div class="g-column">
                 <span class="text-column">Выполнено:</span>
-                @foreach($group[3] as $tasks)
-                    <div class="g-task g-task-ok">
-                        <a class="open-g-task" href="#">
-                            <div class="g-task-header"><div class="g-task-header-name">Мне поручил Антон Иванович Иванов:</div>
-                                {{ $tasks->title }}<div class="g-task-footer-urgency"></div></div>
-                        </a>
-                        <div class="g-task-footer">
-                            <div class="g-task-footer-date">
-                                {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                @isset($group[3])
+                    @foreach($group[3] as $tasks)
+                        <div class="g-task g-task-ok">
+                            <a class="open-g-task" href="#">
+                                <div class="g-task-header"><div class="g-task-header-name">Мне поручил Антон Иванович Иванов:</div>
+                                    {{ $tasks->title }}<div class="g-task-footer-urgency"></div></div>
+                            </a>
+                            <div class="g-task-footer">
+                                <div class="g-task-footer-date">
+                                    {{ $tasks->start_at . '  -  ' . $tasks->finish_at  }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endisset
             </div>
         </div>
     </div>

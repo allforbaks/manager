@@ -31,5 +31,10 @@ class ProjectDatabaseSeeder extends Seeder
             'created_at' => '2018-10-05 06:12:08',
             'updated_at' => '2018-10-05 06:14:23',
         ]);
+
+        DB::table('prices')->insert([
+            'project' => 100,
+            'task' => 10,
+        ]);
     }
 }

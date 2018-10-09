@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Role;
-use App\User;
+use Modules\Admin\Entities\User;
+use Modules\Admin\Entities\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('123456');
         $user->image = 'uploads/avatar.png';
         $user->save();
-        $user->roles()->attach($role_user);
+        $user->role()->attach($role_user);
 
         $admin = new User();
         $admin->name = 'Админов Админ Админович';
@@ -32,6 +32,6 @@ class UserTableSeeder extends Seeder
         $admin->password = bcrypt('123456');
         $admin->image = 'uploads/avatar.png';
         $admin->save();
-        $admin->roles()->attach($role_admin);
+        $admin->role()->attach($role_admin);
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatUserRoleTable extends Migration
+class CreateUserRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +14,8 @@ class CreatUserRoleTable extends Migration
     {
         Schema::create('user_role', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
-            $table->string('role_id');
+            $table->integer('user_id');
+            $table->integer('role_id');
             $table->timestamps();
         });
     }

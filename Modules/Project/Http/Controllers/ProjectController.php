@@ -47,7 +47,8 @@ class ProjectController extends Controller
     {
         $service->addProject($price);
 
-        $project->create(['title' => $request->title]);
+        $project->create(['title' => $request->title,
+            'user_id' => auth()->user()->id]);
 
         return redirect()->route('project.show', $project);
     }
@@ -60,6 +61,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $group = $project->task->groupBy('status');
+
         return view('project::show', compact('group', 'project'));
     }
 

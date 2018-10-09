@@ -2,7 +2,7 @@
 
 use Modules\Admin\Http\Controllers\AdminController;
 
-Route::group(['middleware' => 'web', 'prefix' => 'admin'], function()
+Route::group(['middleware' => 'roles', 'prefix' => 'admin', 'roles' => ['Admin']], function()
 {
     Route::get('/users', [AdminController::class, 'indexUser'])->name('admin.user');
     Route::get('/projects', [AdminController::class, 'indexProject'])->name('admin.project');

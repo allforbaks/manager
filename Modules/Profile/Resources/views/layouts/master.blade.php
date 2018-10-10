@@ -108,9 +108,11 @@
                                     </li>
                                 </ul>
                             </li>
+                            @if( Auth::user()->roles->first()->name === 'Admin')
                                 <li class="q-main-menu__item _dropdown">
-                                    <a href="admin/users" class="q-main-menu__link">Открыть админ панель</a>
+                                    <a href="{{ route('admin.user') }}" class="q-main-menu__link">Открыть админ панель</a>
                                 </li>
+                            @endif
                             <li class="q-main-menu__item _dropdown">
                                 <a href="{{ route('project.index') }}" class="q-main-menu__link">Проекты</a>
                                 <ul class="q-main-submenu submenu-new-projekt">

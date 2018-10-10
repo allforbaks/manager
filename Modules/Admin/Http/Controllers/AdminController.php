@@ -4,10 +4,9 @@ namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Profile\Entities\User;
+use Modules\Admin\Entities\User;
 use Modules\Project\Entities\Project;
 use Modules\Admin\Entities\Price;
-use Modules\Admin\Entities\Role;
 use Illuminate\Routing\Controller;
 
 class AdminController extends Controller

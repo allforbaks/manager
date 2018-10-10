@@ -7,16 +7,31 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Profile\Entities\User;
 use Modules\Profile\Entities\Payment;
+use Modules\Profile\Http\Library\Services\PaymentService;
 
 class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @param User $user
      * @return Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('profile::index');
+        return view('profile::result', compact('user'));
+    }
+
+    /**
+     * Show the form for requisites for payment
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function cart(Request $request, User $user)
+    {
+        $value = $request->value;
+
+        return view('profile::cart', compact('value', 'user'));
     }
 
     /**
@@ -25,7 +40,6 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return view('profile::create');
     }
 
     /**
@@ -33,19 +47,12 @@ class PaymentController extends Controller
      * @param User $user
      * @param Payment $payment
      * @param  Request $request
+     * @param PaymentService $service
      * @return Response
      */
-    public function store(Request $request, User $user, Payment $payment)
+    public function store(Request $request, User $user, Payment $payment, PaymentService $service)
     {
-        $user->balance += $request->value;
-        $user->save();
-
-        $payment->create(['value' => $request->value,
-                        'user_id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email]);
-
-        return redirect()->route('profile.show', $user);
+        echo $service->pay($payment, $user, $request);
     }
 
     /**

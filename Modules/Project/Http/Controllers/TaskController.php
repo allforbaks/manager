@@ -32,7 +32,7 @@ class TaskController extends Controller
      */
     public function create(Price $price, Project $project, Task $task, TaskService $service)
     {
-       return $service->checkBalance($project, $task, $price);
+       $service->checkBalance($project, $task, $price);
     }
 
     /**

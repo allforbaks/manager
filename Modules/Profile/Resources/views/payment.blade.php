@@ -9,11 +9,11 @@
             <div class="q-page__header">
                 <h1 class="q-page__title">Пополнение баланса</h1>
             </div>
-            {!! Form::open(['route' => ['payment.pay', $user->id]], ['class' => 'q-form g-no-projects']) !!}
+            {!! Form::open(['route' => ['payment.cart', $user->id]], ['class' => 'q-form g-no-projects']) !!}
             <div class="q-form__row">
                 {{ Form::label('value', 'Сумма пополнения:', ['class' => 'q-form__label']) }}
                 <div class="q-form__input--wrapper">
-                    {{ Form::number('value', null,  ['class' => 'q-form__input q-form-white'])  }}
+                    {{ Form::number('value', 0,  ['class' => 'q-form__input q-form-white'])  }}
                 </div>
             </div>
             <div class="q-form__row _submit">

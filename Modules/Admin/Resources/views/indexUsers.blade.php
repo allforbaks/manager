@@ -44,7 +44,7 @@
                                     {{ $user->balance }}
                                 </p>
                             </td>
-                            <td>{{$user->role}}</td>
+                            <td>{{ $user->roles->first()->name }}</td>
                             <td>
                                 <div class="q-buttons__list">
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['admin.user.delete', $user]]) !!}

@@ -32,7 +32,7 @@ class ProjectController extends Controller
      */
     public function create(Price $price, Project $project, ProjectService $service)
     {
-        return $service->checkBalance($project, $price);
+        print $service->checkBalance($project, $price);
     }
 
     /**
@@ -45,10 +45,7 @@ class ProjectController extends Controller
      */
     public function store(Price $price, Project $project, CreateProject $request, ProjectService $service)
     {
-        $service->addProject($price);
-
-        $project->create(['title' => $request->title,
-            'user_id' => auth()->user()->id]);
+        print $service->addProject($price, $project, $request);
 
         return redirect()->route('project.show', $project);
     }

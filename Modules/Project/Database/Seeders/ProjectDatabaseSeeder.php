@@ -26,8 +26,33 @@ class ProjectDatabaseSeeder extends Seeder
             'urgency' => 'Быстрее',
             'start_at' => '2018-10-05 06:12:08',
             'finish_at' => '2018-10-07 06:12:08',
-            'title' => 'Помочь мишке найти грибы',
-            'description' => 'Мишка не может найти грибы, помоги ему, иначе прийдет Маша!',
+            'title' => 'Задача 1',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            'status' => 1,
+            'created_at' => '2018-10-05 06:12:08',
+            'updated_at' => '2018-10-05 06:14:23',
+        ]);
+
+        DB::table('tasks')->insert([
+            'project_id' => 1,
+            'urgency' => 'Быстрее',
+            'start_at' => '2018-10-05 06:12:08',
+            'finish_at' => '2018-10-07 06:12:08',
+            'title' => 'Задача 2',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            'status' => 2,
+            'created_at' => '2018-10-05 06:12:08',
+            'updated_at' => '2018-10-05 06:14:23',
+        ]);
+
+        DB::table('tasks')->insert([
+            'project_id' => 1,
+            'urgency' => 'Быстрее',
+            'start_at' => '2018-10-05 06:12:08',
+            'finish_at' => '2018-10-07 06:12:08',
+            'title' => 'Задача 3',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            'status' => 3,
             'created_at' => '2018-10-05 06:12:08',
             'updated_at' => '2018-10-05 06:14:23',
         ]);

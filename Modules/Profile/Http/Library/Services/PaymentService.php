@@ -6,7 +6,7 @@ Class PaymentService
 {
     public function pay($payment, $user, $request)
     {
-        $status = rand(0, 5);
+        $status = rand(0, 2);
 
         if($status != 1) {
 
@@ -20,7 +20,7 @@ Class PaymentService
                 'email' => $request->email
             ]);
 
-            return redirect('profile/' . $user->id . '/payment/result')->with('success', 'Ваш счет пополнен успешно!');
+            return redirect('profile/' . $user->id . '/payment/result')->with('success', 'Ваш счет успешно пополнен!');
 
         } else {
 

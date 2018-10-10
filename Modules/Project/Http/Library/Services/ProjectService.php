@@ -22,10 +22,13 @@ Class ProjectService
     /**
      * @param $price
      */
-    public function addProject($price)
+    public function addProject($price, $project, $request)
     {
         auth()->user()->balance -= $price->first()->project;
         auth()->user()->save();
+
+        $project->create(['title' => $request->title,
+            'user_id' => auth()->user()->id]);
     }
 
 

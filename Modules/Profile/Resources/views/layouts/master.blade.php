@@ -30,7 +30,7 @@
         <header class="q-header">
             <div class="q-inner">
                 <a href="/" class="q-logo">
-                    <img src="/storage/logo.svg" alt="" class="q-logo__img">
+                    <img src="/storage/uploads/logo.svg" alt="" class="q-logo__img">
                 </a>
                 <div class="q-mobile-burger js-toggle-mobile-menu">
                     <span></span>

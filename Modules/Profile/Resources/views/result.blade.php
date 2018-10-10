@@ -16,7 +16,6 @@
                         {{ Session::get('error') }}
                     </h1>
                 @endif
-                {{  }}
             </div>
         </div>
     </div>

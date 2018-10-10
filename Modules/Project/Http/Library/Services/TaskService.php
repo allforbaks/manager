@@ -24,9 +24,19 @@ Class TaskService
     /**
      * @param $price
      */
-    public function addTask($price)
+    public function addTask($price, $request, $task)
     {
         auth()->user()->balance -= $price->first()->task;
         auth()->user()->save();
+
+        $task->create([
+            'urgency' => $request->urgency,
+            'project_id' => $request->project_id,
+            'start_at' => $request->start_at,
+            'finish_at' => $request->finish_at,
+            'title' => $request->title,
+            'description' => $request->description,
+            'file' => $request->file('file')->store('uploads', 'public')
+        ]);
     }
 }

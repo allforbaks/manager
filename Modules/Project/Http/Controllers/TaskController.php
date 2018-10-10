@@ -32,7 +32,7 @@ class TaskController extends Controller
      */
     public function create(Price $price, Project $project, Task $task, TaskService $service)
     {
-       $service->checkBalance($project, $task, $price);
+       print $service->checkBalance($project, $task, $price);
     }
 
     /**
@@ -46,17 +46,7 @@ class TaskController extends Controller
      */
     public function store(TaskService $service, Price $price, Task $task, CreateTask $request, Project $project)
     {
-        $service->addTask($price);
-
-        $task->create([
-            'urgency' => $request->urgency,
-            'project_id' => $request->project_id,
-            'start_at' => $request->start_at,
-            'finish_at' => $request->finish_at,
-            'title' => $request->title,
-            'description' => $request->description,
-            'file' => $request->file('file')->store('uploads', 'public')
-        ]);
+        print $service->addTask($price, $request, $task);
 
         return redirect('projects/' . $project->id)->with('success', 'Задача добавлена успешно!');
 

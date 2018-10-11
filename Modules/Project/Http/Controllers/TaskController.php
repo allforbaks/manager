@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\Task;
 use Modules\Admin\Entities\Price;
-use Modules\Project\Http\Library\Services\TaskService;
 use Modules\Project\Http\Requests\CreateTask;
 
 class TaskController extends Controller
@@ -25,28 +24,44 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      * @param Task $task
-     * @param TaskService $service
      * @param Price $price
      * @param Project $project
      * @return Response
      */
-    public function create(Price $price, Project $project, Task $task, TaskService $service)
+    public function create(Price $price, Project $project, Task $task)
     {
-       print $service->checkBalance($project, $task, $price);
+        $balance = auth()->user()->balance;
+
+        if ( $balance < $price->first()->task )
+        {
+            return redirect('projects/' . $project->id)->with('error', 'Недостаточно средств на счету. Пополните баланс!');
+        } else {
+            return view('project::addTask', compact('project', 'task'));
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      * @param Project $project
      * @param Price $price
-     * @param TaskService $service
      * @param Task $task
      * @param  CreateTask $request
      * @return Response
      */
-    public function store(TaskService $service, Price $price, Task $task, CreateTask $request, Project $project)
+    public function store(Price $price, Task $task, CreateTask $request, Project $project)
     {
-        print $service->addTask($price, $request, $task);
+        auth()->user()->balance -= $price->first()->task;
+        auth()->user()->save();
+
+        $task->create([
+            'urgency' => $request->urgency,
+            'project_id' => $request->project_id,
+            'start_at' => $request->start_at,
+            'finish_at' => $request->finish_at,
+            'title' => $request->title,
+            'description' => $request->description,
+            'file' => $request->file('file')->store('uploads', 'public')
+        ]);
 
         return redirect('projects/' . $project->id)->with('success', 'Задача добавлена успешно!');
 

@@ -3,6 +3,7 @@
 namespace Modules\Admin\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Profile\Entities\User;
 
 class Role extends Model
 {

@@ -5,8 +5,8 @@ namespace Modules\Project\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
+use Modules\Profile\Entities\User;
 use Modules\Admin\Entities\Price;
-use Modules\Project\Http\Library\Services\ProjectService;
 use Modules\Project\Http\Requests\CreateProject;
 
 class ProjectController extends Controller
@@ -24,28 +24,35 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @param  Project $project
      * @param Price $price
-     * @param ProjectService $service
-     * @return Response
+     * @param Project $project
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function create(Price $price, Project $project, ProjectService $service)
+    public function create(Price $price, Project $project, User $user)
     {
-        print $service->checkBalance($project, $price);
+        if ( $user->balance < $price->first()->project )
+        {
+            return redirect()->route('project.index')->with('error', 'Недостаточно средств на счету. Пополните баланс!');
+        } else {
+            return view('project::create');
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param  Project $project
      * @param Price $price
-     * @param  CreateProject $request
-     * @param ProjectService $service
-     * @return Response
+     * @param Project $project
+     * @param CreateProject $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Price $price, Project $project, CreateProject $request, ProjectService $service)
+    public function store(Price $price, Project $project, CreateProject $request, User $user)
     {
-        print $service->addProject($price, $project, $request);
+        $user->balance -= $price->first()->project;
+        $user->save();
+
+        $project->create(['title' => $request->title,
+            'user_id' => auth()->user()->id]);
 
         return redirect()->route('project.show', $project);
     }

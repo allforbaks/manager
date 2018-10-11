@@ -1,13 +1,16 @@
 <?php
 
-use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\{UserController,
+    ProjectController,
+    PriceController
+};
 
 Route::group(['middleware' => ['web', 'roles'], 'prefix' => 'admin', 'roles' => ['Admin']], function()
 {
-    Route::get('/users', [AdminController::class , 'indexUser'])->name('admin.user');
-    Route::get('/projects', [AdminController::class, 'indexProject'])->name('admin.project');
-    Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.user.delete');
-    Route::delete('/projects/{project}', [AdminController::class, 'destroyProject'])->name('admin.project.delete');
-    Route::get('/prices', [AdminController::class, 'show'])->name('admin.price');
-    Route::post('', [AdminController::class, 'update'])->name('update.prices');
+    Route::get('/users', [UserController::class , 'show'])->name('admin.user');
+    Route::get('/projects', [ProjectController::class, 'show'])->name('admin.project');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('admin.project.delete');
+    Route::get('/prices', [PriceController::class, 'show'])->name('admin.price');
+    Route::post('', [PriceController::class, 'update'])->name('update.prices');
 });

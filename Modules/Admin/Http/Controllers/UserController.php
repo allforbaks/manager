@@ -1,24 +1,21 @@
 <?php
 
-namespace Modules\Profile\Http\Controllers;
+namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Profile\Entities\User;
-use Modules\Profile\Http\Requests\UpdateProfile;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
-    use ValidatesRequests;
-
     /**
-     * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+
+        return view('admin::index');
     }
 
     /**
@@ -27,13 +24,15 @@ class ProfileController extends Controller
      */
     public function create()
     {
+        return view('admin::create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param  Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
     }
 
@@ -44,7 +43,9 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        return view('profile::show', compact('user'));
+        $users = $user->latest()->simplePaginate(10);
+
+        return view('admin::show_users', compact('users'));
     }
 
     /**
@@ -53,33 +54,27 @@ class ProfileController extends Controller
      */
     public function edit()
     {
+        return view('admin::edit');
     }
 
     /**
      * Update the specified resource in storage.
-     * @param User $user
-     * @param  UpdateProfile $request
+     * @param  Request $request
      * @return Response
      */
-    public function update(User $user, UpdateProfile $request)
+    public function update(Request $request)
     {
-        $user->update(['name' => $request->name,
-                        'email' => $request->email,
-                        'image' => $request->file('image')->store('uploads', 'public')]);
-
-        return redirect('profile.show', $user);
     }
 
     /**
-     * Remove the specified resource from storage.
      * @param User $user
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
         $user->delete();
 
-        return redirect('home');
-
+        return redirect('admin.user');
     }
 }

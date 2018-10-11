@@ -7,7 +7,7 @@
                 <h1 class="q-page__title">Проекты:</h1>
                 <div class="q-buttons__submit _hide-992">
                     <a href="users" class="q-button _red js-show-q-create-project-popup">Список пользователей</a>
-                    <a href="price" class="q-button _red js-show-q-create-project-popup">Настройка цен</a>
+                    <a href="prices" class="q-button _red js-show-q-create-project-popup">Настройка цен</a>
                     @if(Session::has('success'))
                         <div class="alert alert-success">
                             {{ Session::get('success') }}

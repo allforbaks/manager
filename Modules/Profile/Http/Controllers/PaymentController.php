@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Profile\Entities\User;
 use Modules\Profile\Entities\Payment;
-use Modules\Profile\Http\Library\Services\PaymentService;
 
 class PaymentController extends Controller
 {
@@ -43,16 +42,33 @@ class PaymentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
      * @param User $user
      * @param Payment $payment
-     * @param  Request $request
-     * @param PaymentService $service
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, User $user, Payment $payment, PaymentService $service)
+    public function store(Request $request, User $user, Payment $payment)
     {
-        echo $service->pay($payment, $user, $request);
+        $status = rand(0, 2);
+
+        if($status != 1) {
+
+            $user->balance += $request->value;
+            $user->save();
+
+            $payment->create([
+                'value' => $request->value,
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'email' => $request->email
+            ]);
+
+            return redirect('profile/' . $user->id . '/payment/result')->with('success', 'Ваш счет успешно пополнен!');
+
+        } else {
+
+            return redirect('profile/' . $user->id . '/payment/result')->with('error', 'Ваш счет не пополнен! Проверьте данные');
+        }
     }
 
     /**
